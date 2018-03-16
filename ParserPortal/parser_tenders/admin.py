@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Rzd_Parser
+from .models import Tender, Rzd_etp
 
 # Register your models here.
 
-admin.site.register(Rzd_Parser)
+admin.site.register(Tender, Rzd_etp)
