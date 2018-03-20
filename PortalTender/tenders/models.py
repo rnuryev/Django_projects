@@ -2,44 +2,10 @@ from django.db import models
 import requests
 from bs4 import BeautifulSoup
 from datetime import date
-
-class Tenders(models.Model):
-    code = models.CharField(max_length=100)
-    subject = models.CharField(max_length=350)
-    customer = models.CharField(max_length=250)
-    price = models.CharField(max_length=250)
-    deadline = models.DateTimeField()
-    link = models.URLField()
-    rzd_tenders_request = models.ForeignKey(RzdTenders, related_name='found_tenders')
-
-
-class TenderDocuments(models.Model):
-    doc_title = models.CharField(max_length=250)
-    doc_link = models.URLField()
-    tender = models.ForeignKey(Tenders, related_name='document_links')
+from django.shortcuts import get_object_or_404
 
 class RzdTenders(models.Model):
-    DATA_SET = {
-        'p_page': 0,
-        'p_page_size': 25,
-        'p_order': 'DATEENDSEARCH',
-        'p_orderType': 'DESC',
-        'p_org': 'all',
-        'p_cust': 'all',
-        'p_inlots': 'true',
-        'p_msp': 'false',
-        'p_type_select': None,
-        'p_cust_select': 'all',
-        'p_org_select': 'all',
-        'p_cnumber': None,
-        # 'name_text': name_text,
-        # 'p_dateend_begin': bid_deadlin_from,
-        # 'p_dateend_begin_old': bid_deadlin_from,
-        'p_dateend_end': None,
-        'p_dateend_end_old': None,
-        'p_contest_date_oa_begin_old': None,
-        'p_contest_date_oa_end_old': None,
-    }
+
     url = models.CharField(max_length=250, default='http://etzp.rzd.ru/freeccee/main?ACTION=searchProc')
     query_string = models.CharField(max_length=250)
     bid_deadlin_from = models.DateField(default=date.today)
@@ -118,4 +84,65 @@ class RzdTenders(models.Model):
                 'document_links': document_links
             }
 
-            write_csv(data)
+            return data
+
+        data = {
+            'p_page': 0,
+            'p_page_size': 25,
+            'p_order': 'DATEENDSEARCH',
+            'p_orderType': 'DESC',
+            'p_org': 'all',
+            'p_cust': 'all',
+            'p_inlots': 'true',
+            'p_msp': 'false',
+            'p_type_select': None,
+            'p_cust_select': 'all',
+            'p_org_select': 'all',
+            'p_cnumber': None,
+            'name_text': self.query_string,
+            'p_dateend_begin': self.bid_deadlin_from,
+            'p_dateend_begin_old': self.bid_deadlin_from,
+            'p_dateend_end': None,
+            'p_dateend_end_old': None,
+            'p_contest_date_oa_begin_old': None,
+            'p_contest_date_oa_end_old': None,
+        }
+
+        RzdTenders_object = get_object_or_404(RzdTenders, pk=self.pk)
+
+        all_links = get_all_links(self.url, data)
+
+        for link in all_links:
+            data_tender = get_page_data(link)
+            new_tender = Tenders(code=data_tender['code'],
+                                 subject=data_tender['subject'],
+                                 customer=data_tender['customer'],
+                                 price=data_tender['price'],
+                                 deadline=data_tender['deadline'],
+                                 link=data_tender['link'])
+
+            new_tender.rzd_tenders_request=RzdTenders_object
+
+            for doc_l in data_tender['document_links']:
+                new_tender_documents = TenderDocuments(doc_title=doc_l['doc_name'], doc_link=doc_l['doc_link'])
+                new_tender_documents.tender = new_tender
+
+class Tenders(models.Model):
+    code = models.CharField(max_length=100)
+    subject = models.CharField(max_length=350)
+    customer = models.CharField(max_length=250)
+    price = models.CharField(max_length=250)
+    deadline = models.DateTimeField()
+    link = models.URLField()
+    rzd_tenders_request = models.ForeignKey(RzdTenders, related_name='found_tenders', on_delete=models.CASCADE)
+
+
+class TenderDocuments(models.Model):
+    doc_title = models.CharField(max_length=250)
+    doc_link = models.URLField()
+    tender = models.ForeignKey(Tenders, related_name='document_links', on_delete=models.CASCADE)
+
+
+
+
+
