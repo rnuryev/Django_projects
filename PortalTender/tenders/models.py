@@ -8,7 +8,8 @@ class RzdTenders(models.Model):
 
     url = models.CharField(max_length=250, default='http://etzp.rzd.ru/freeccee/main?ACTION=searchProc')
     query_string = models.CharField(max_length=250)
-    bid_deadlin_from = models.DateField(default=date.today)
+    # bid_deadlin_from = models.DateField(default=date.today)
+    bid_deadlin_from = models.DateField(default=None, null=True, blank=True)
 
     def __str__(self):
         return 'Тендеры РЖД. Запрос: ' + self.query_string
@@ -108,8 +109,6 @@ class RzdTenders(models.Model):
             'p_contest_date_oa_end_old': None,
         }
 
-        RzdTenders_object = get_object_or_404(RzdTenders, pk=self.pk)
-
         all_links = get_all_links(self.url, data)
 
         for link in all_links:
@@ -121,18 +120,23 @@ class RzdTenders(models.Model):
                                  deadline=data_tender['deadline'],
                                  link=data_tender['link'])
 
-            new_tender.rzd_tenders_request=RzdTenders_object
+            new_tender.rzd_tenders_request = RzdTenders.objects.get(pk=self.pk)
+
+            new_tender.save()
 
             for doc_l in data_tender['document_links']:
                 new_tender_documents = TenderDocuments(doc_title=doc_l['doc_name'], doc_link=doc_l['doc_link'])
                 new_tender_documents.tender = new_tender
+                new_tender_documents.save()
+
+
 
 class Tenders(models.Model):
     code = models.CharField(max_length=100)
     subject = models.CharField(max_length=350)
     customer = models.CharField(max_length=250)
     price = models.CharField(max_length=250)
-    deadline = models.DateTimeField()
+    deadline = models.CharField(max_length=20)
     link = models.URLField()
     rzd_tenders_request = models.ForeignKey(RzdTenders, related_name='found_tenders', on_delete=models.CASCADE)
 

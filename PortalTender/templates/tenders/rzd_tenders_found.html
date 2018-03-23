@@ -1,0 +1,44 @@
+{% extends "tenders/base.html" %}
+{% block title %}Найденные тендеры РЖД{% endblock %}
+{% block content %}
+    <h1>Найденные тендеры РЖД</h1>
+    <h3>Запрос:  {{ tender_query.query_string }}</h3>
+    <table>
+        {% for tend in found_tender %}
+            <tr>
+                <td>
+                    {{ tend.code }}
+                </td>
+                <td>
+                    {{ tend.subject }}
+                </td>
+                <td>
+                    {{ tend.customer }}
+                <td>
+                    {{ tend.price }}
+                </td>
+                <td>
+                    {{ tend.deadline }}
+                </td>
+                <td>
+                    {{ tend.link }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{#    {% for rzd_q in rzd_query_all %}#}
+{#        <h2>#}
+{#            Тендер РДЖ по запросу: {{ rzd_q.query_string }}#}
+{#        </h2>#}
+{#        <h2>#}
+{#            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>#}
+{#        </h2>#}
+{#        <p class="date">#}
+{#            Published {{ post.publish }} by {{ post.author }}#}
+{#        </p>#}
+{#        {{ post.body|truncatewords:30|linebreaks }}#}
+{#    {% endfor %}#}
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "tenders/base.html" %}
+{% block title %}Тендеры РЖД. Новый запрос{% endblock %}
+{% block content %}
+    <h1>Тендеры РЖД. Новый запрос</h1>
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+{% endblock %}
