@@ -8,8 +8,8 @@ class RzdTenders(models.Model):
 
     url = models.CharField(max_length=250, default='http://etzp.rzd.ru/freeccee/main?ACTION=searchProc')
     query_string = models.CharField(max_length=250)
-    # bid_deadlin_from = models.DateField(default=date.today)
-    bid_deadlin_from = models.DateField(default=None, null=True, blank=True)
+    #bid_deadlin_from = models.DateField(default=date.today, null=True, blank=True)
+    bid_deadlin_from = models.CharField(max_length=50)
 
     def __str__(self):
         return 'Тендеры РЖД. Запрос: ' + self.query_string
@@ -27,6 +27,7 @@ class RzdTenders(models.Model):
         def get_all_links(url, data):
             html = get_html_post(url, data)
             soup = BeautifulSoup(html, 'lxml')
+            # total_page = int(soup.find('div', class_='a8b').find_all('td', class_='pagesButtons')[-1].text.strip())
             links = soup.find('table', class_='tableProc').find_all('tr')
             all_links = []
             for lk in links:
@@ -89,7 +90,7 @@ class RzdTenders(models.Model):
 
         data = {
             'p_page': 0,
-            'p_page_size': 25,
+            'p_page_size': 900,
             'p_order': 'DATEENDSEARCH',
             'p_orderType': 'DESC',
             'p_org': 'all',

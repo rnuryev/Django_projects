@@ -3,25 +3,36 @@
 {% block content %}
     <h1>Найденные тендеры РЖД</h1>
     <h3>Запрос:  {{ tender_query.query_string }}</h3>
+    <h3>Окончательный срок подачи заявок с:  {{ tender_query.bid_deadlin_from }}</h3>
+    <form method="post">
+        {% csrf_token %}
+        Уточнение запроса: {{ form.addition_query }}<br><br>
+        <button type="submit">Уточнить запрос</button>
+    </form>
     <table>
         {% for tend in found_tender %}
             <tr>
-                <td>
-                    {{ tend.code }}
+                <td width="5%">
+                    <a href="{{ tend.link }}">{{ tend.code }}</a>
                 </td>
-                <td>
+                <td width="50%">
                     {{ tend.subject }}
                 </td>
-                <td>
+                <td width="10%">
                     {{ tend.customer }}
-                <td>
+                <td width="10%">
                     {{ tend.price }}
                 </td>
-                <td>
+                <td width="5%">
                     {{ tend.deadline }}
                 </td>
-                <td>
-                    {{ tend.link }}
+                <td width="20%">
+                    <ul>
+                        {% for d_l in tend.document_links.all %}
+                            <li><a href="{{ d_l.doc_link }}">{{ d_l.doc_title }}</a> </li>
+                        {% endfor %}
+                    </ul>
+
                 </td>
             </tr>
         {% endfor %}

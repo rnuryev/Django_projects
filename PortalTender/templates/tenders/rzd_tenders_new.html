@@ -4,7 +4,17 @@
     <h1>Тендеры РЖД. Новый запрос</h1>
     <form method="post" class="post-form">
         {% csrf_token %}
-        {{ form.as_p }}
+        Адрес: {{ form.url }}<br><br>
+        Запрос: {{ form.query_string }}<br><br>
+        Дата: {{ form.bid_deadlin_from }}
+        <script>
+            $(function () {
+                $("#id_bid_deadlin_from").mask("99.99.9999", {placeholder: "дд.мм.гггг"});
+            });
+
+        </script>
+        <br><br>
+
         <button type="submit">Сохранить</button>
     </form>
 {% endblock %}

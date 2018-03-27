@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import RzdTenders
-from .forms import RzdTendersForm
+from .forms import RzdTendersForm, RzdTendersAdditionForm
 
 # Create your views here.
 
@@ -23,4 +23,10 @@ def rzd_tenders_new(request):
 def rzd_tenders_found(request, pk):
     tender_query = get_object_or_404(RzdTenders, pk=pk)
     found_tender = tender_query.found_tenders.all()
-    return render(request, 'tenders/rzd_tenders_found.html', {'tender_query': tender_query, 'found_tender': found_tender})
+    if request.method == "POST":
+        form = RzdTendersAdditionForm(request.POST)
+        if form.is_valid():
+            found_tender = tender_query.found_tenders.filter(subject__contains=request.POST.get('addition_query'))
+    else:
+        form = RzdTendersAdditionForm()
+    return render(request, 'tenders/rzd_tenders_found.html', {'tender_query': tender_query, 'found_tender': found_tender, 'form': form})
