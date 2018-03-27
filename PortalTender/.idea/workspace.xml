@@ -17,21 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PortalTender/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="106" column="22" lean-forward="false" selection-start-line="106" selection-start-column="22" selection-end-line="106" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tenders/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="102">
+              <caret line="6" column="65" lean-forward="false" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="65" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -42,23 +32,36 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/tenders/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="41" lean-forward="false" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
+            <state relative-caret-position="255">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tenders/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="136" column="9" lean-forward="false" selection-start-line="136" selection-start-column="9" selection-end-line="136" selection-end-column="9" />
+            <state relative-caret-position="816">
+              <caret line="162" column="0" lean-forward="true" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
-                <element signature="e#640#699#0" expanded="false" />
-                <element signature="e#744#791#0" expanded="false" />
-                <element signature="e#1421#3046#0" expanded="false" />
+                <element signature="e#687#4766#0" expanded="false" />
+                <element signature="e#729#788#0" expanded="false" />
+                <element signature="e#833#880#0" expanded="false" />
+                <element signature="e#1510#3135#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tenders/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tenders/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="31" column="78" lean-forward="false" selection-start-line="31" selection-start-column="78" selection-end-line="31" selection-end-column="78" />
+            <state relative-caret-position="595">
+              <caret line="35" column="72" lean-forward="false" selection-start-line="35" selection-start-column="72" selection-end-line="35" selection-end-column="72" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
@@ -92,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/templates/tenders/rzd_tenders_new.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="48" />
+              <caret line="17" column="48" lean-forward="true" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -101,8 +104,8 @@
       <file leaf-file-name="rzd_tenders.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/tenders/rzd_tenders.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -111,21 +114,9 @@
       <file leaf-file-name="rzd_tenders_found.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/tenders/rzd_tenders_found.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="54" lean-forward="true" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
+            <state relative-caret-position="481">
+              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="new_rzd_parser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../Python_projects/Tender_parser/new_rzd_parser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="101" column="27" lean-forward="true" selection-start-line="101" selection-start-column="27" selection-end-line="101" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -150,12 +141,13 @@
         <option value="$PROJECT_DIR$/templates/tenders/rzd_tenders.html" />
         <option value="$PROJECT_DIR$/../../Python_projects/Tender_parser/new_rzd_parser.py" />
         <option value="$PROJECT_DIR$/PortalTender/settings.py" />
-        <option value="$PROJECT_DIR$/tenders/models.py" />
         <option value="$PROJECT_DIR$/templates/tenders/rzd_tenders_new.html" />
-        <option value="$PROJECT_DIR$/templates/tenders/base.html" />
         <option value="$PROJECT_DIR$/tenders/forms.py" />
-        <option value="$PROJECT_DIR$/templates/tenders/rzd_tenders_found.html" />
+        <option value="$PROJECT_DIR$/templates/tenders/base.html" />
         <option value="$PROJECT_DIR$/tenders/views.py" />
+        <option value="$PROJECT_DIR$/templates/tenders/tanders_not_found.html" />
+        <option value="$PROJECT_DIR$/templates/tenders/rzd_tenders_found.html" />
+        <option value="$PROJECT_DIR$/tenders/models.py" />
       </list>
     </option>
   </component>
@@ -353,23 +345,16 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/tenders/rzd_tenders_found.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tenders/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1887">
           <caret line="111" column="8" lean-forward="false" selection-start-line="111" selection-start-column="8" selection-end-line="111" selection-end-column="8" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#640#699#0" expanded="false" />
-            <element signature="e#744#791#0" expanded="false" />
-            <element signature="e#1421#3046#0" expanded="false" />
+            <element signature="e#687#4766#0" expanded="false" />
+            <element signature="e#729#788#0" expanded="false" />
+            <element signature="e#833#880#0" expanded="false" />
+            <element signature="e#1510#3135#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -406,9 +391,10 @@
           <caret line="8" column="67" lean-forward="true" selection-start-line="8" selection-start-column="67" selection-end-line="8" selection-end-column="67" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#640#699#0" expanded="false" />
-            <element signature="e#744#791#0" expanded="false" />
-            <element signature="e#1421#3046#0" expanded="false" />
+            <element signature="e#687#4766#0" expanded="false" />
+            <element signature="e#729#788#0" expanded="false" />
+            <element signature="e#833#880#0" expanded="false" />
+            <element signature="e#1510#3135#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -532,9 +518,10 @@
           <caret line="116" column="44" lean-forward="true" selection-start-line="116" selection-start-column="44" selection-end-line="116" selection-end-column="44" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#640#699#0" expanded="false" />
-            <element signature="e#744#791#0" expanded="false" />
-            <element signature="e#1421#3046#0" expanded="false" />
+            <element signature="e#687#4766#0" expanded="false" />
+            <element signature="e#729#788#0" expanded="false" />
+            <element signature="e#833#880#0" expanded="false" />
+            <element signature="e#1510#3135#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -563,9 +550,10 @@
           <caret line="148" column="0" lean-forward="true" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#640#699#0" expanded="false" />
-            <element signature="e#744#791#0" expanded="false" />
-            <element signature="e#1421#3046#0" expanded="false" />
+            <element signature="e#687#4766#0" expanded="false" />
+            <element signature="e#729#788#0" expanded="false" />
+            <element signature="e#833#880#0" expanded="false" />
+            <element signature="e#1510#3135#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -641,9 +629,10 @@
           <caret line="120" column="27" lean-forward="true" selection-start-line="120" selection-start-column="27" selection-end-line="120" selection-end-column="27" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#640#699#0" expanded="false" />
-            <element signature="e#744#791#0" expanded="false" />
-            <element signature="e#1421#3046#0" expanded="false" />
+            <element signature="e#687#4766#0" expanded="false" />
+            <element signature="e#729#788#0" expanded="false" />
+            <element signature="e#833#880#0" expanded="false" />
+            <element signature="e#1510#3135#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -701,13 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tenders/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PortalTender/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -733,13 +715,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tenders/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tenders/rzd_tenders.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tenders/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state relative-caret-position="102">
+          <caret line="6" column="65" lean-forward="false" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="65" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tenders/tanders_not_found.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="70" lean-forward="false" selection-start-line="6" selection-start-column="70" selection-end-line="6" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tenders/rzd_tenders_new.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="48" lean-forward="true" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -755,9 +769,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/tenders/rzd_tenders_found.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="54" lean-forward="true" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
+        <state relative-caret-position="481">
+          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tenders/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tenders/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="162" column="0" lean-forward="true" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#687#4766#0" expanded="false" />
+            <element signature="e#729#788#0" expanded="false" />
+            <element signature="e#833#880#0" expanded="false" />
+            <element signature="e#1510#3135#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -771,49 +809,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tenders/rzd_tenders.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tenders/rzd_tenders_new.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tenders/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="31" column="78" lean-forward="false" selection-start-line="31" selection-start-column="78" selection-end-line="31" selection-end-column="78" />
+        <state relative-caret-position="595">
+          <caret line="35" column="72" lean-forward="false" selection-start-line="35" selection-start-column="72" selection-end-line="35" selection-end-column="72" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tenders/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="41" lean-forward="false" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tenders/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="136" column="9" lean-forward="false" selection-start-line="136" selection-start-column="9" selection-end-line="136" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#640#699#0" expanded="false" />
-            <element signature="e#744#791#0" expanded="false" />
-            <element signature="e#1421#3046#0" expanded="false" />
           </folding>
         </state>
       </provider>

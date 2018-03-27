@@ -1,7 +1,9 @@
 {% extends "tenders/base.html" %}
 {% block title %}Найденные тендеры РЖД{% endblock %}
 {% block content %}
-    <h1>Найденные тендеры РЖД</h1>
+    <h1>
+        <a href="{% url 'rzd_tenders_query' %}">Найденные тендеры РЖД</a>
+    </h1>
     <h3>Запрос:  {{ tender_query.query_string }}</h3>
     <h3>Окончательный срок подачи заявок с:  {{ tender_query.bid_deadlin_from }}</h3>
     <form method="post">
@@ -38,18 +40,5 @@
         {% endfor %}
     </table>
 
-
-{#    {% for rzd_q in rzd_query_all %}#}
-{#        <h2>#}
-{#            Тендер РДЖ по запросу: {{ rzd_q.query_string }}#}
-{#        </h2>#}
-{#        <h2>#}
-{#            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>#}
-{#        </h2>#}
-{#        <p class="date">#}
-{#            Published {{ post.publish }} by {{ post.author }}#}
-{#        </p>#}
-{#        {{ post.body|truncatewords:30|linebreaks }}#}
-{#    {% endfor %}#}
 
 {% endblock %}

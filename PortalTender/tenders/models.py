@@ -6,10 +6,10 @@ from django.shortcuts import get_object_or_404
 
 class RzdTenders(models.Model):
 
-    url = models.CharField(max_length=250, default='http://etzp.rzd.ru/freeccee/main?ACTION=searchProc')
-    query_string = models.CharField(max_length=250)
+    url = models.CharField(max_length=250, default='http://etzp.rzd.ru/freeccee/main?ACTION=searchProc', verbose_name=u'Адрес запроса')
+    query_string = models.CharField(max_length=250, verbose_name=u'Запрос')
     #bid_deadlin_from = models.DateField(default=date.today, null=True, blank=True)
-    bid_deadlin_from = models.CharField(max_length=50)
+    bid_deadlin_from = models.CharField(max_length=50, verbose_name=u'Подача заявки с:')
 
     def __str__(self):
         return 'Тендеры РЖД. Запрос: ' + self.query_string
@@ -130,23 +130,40 @@ class RzdTenders(models.Model):
                 new_tender_documents.tender = new_tender
                 new_tender_documents.save()
 
+    class Meta:
+        verbose_name = 'Тендер РЖД'
+        verbose_name_plural = 'Тендеры РЖД'
+
 
 
 class Tenders(models.Model):
-    code = models.CharField(max_length=100)
-    subject = models.CharField(max_length=350)
-    customer = models.CharField(max_length=250)
-    price = models.CharField(max_length=250)
-    deadline = models.CharField(max_length=20)
-    link = models.URLField()
-    rzd_tenders_request = models.ForeignKey(RzdTenders, related_name='found_tenders', on_delete=models.CASCADE)
+    code = models.CharField(max_length=100, verbose_name=u'Код тендера')
+    subject = models.CharField(max_length=350, verbose_name=u'Предмет')
+    customer = models.CharField(max_length=250, verbose_name=u'Заказчик')
+    price = models.CharField(max_length=250, verbose_name=u'Цена')
+    deadline = models.CharField(max_length=20, verbose_name=u'Срок подачи заявок')
+    link = models.URLField(verbose_name=u'Ссылка')
+    rzd_tenders_request = models.ForeignKey(RzdTenders, related_name='found_tenders', on_delete=models.CASCADE, verbose_name=u'Запрос тендера')
+
+    def __str__(self):
+        return 'Тендер №:' + self.code + ' для запроса:' + self.rzd_tenders_request.__str__()
+
+    class Meta:
+        verbose_name = 'Тендер'
+        verbose_name_plural = 'Тендеры'
 
 
 class TenderDocuments(models.Model):
-    doc_title = models.CharField(max_length=250)
-    doc_link = models.URLField()
-    tender = models.ForeignKey(Tenders, related_name='document_links', on_delete=models.CASCADE)
+    doc_title = models.CharField(max_length=250, verbose_name=u'Название документа')
+    doc_link = models.URLField(verbose_name=u'Ссылка на документ')
+    tender = models.ForeignKey(Tenders, related_name='document_links', on_delete=models.CASCADE, verbose_name=u'Тендер')
 
+    def __str__(self):
+        return 'Тендерная документация по тендеру: ' + self.tender.__str__()
+
+    class Meta:
+        verbose_name = 'Документ тендера'
+        verbose_name_plural = 'Документы тендера'
 
 
 

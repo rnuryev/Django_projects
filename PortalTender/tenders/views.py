@@ -14,7 +14,10 @@ def rzd_tenders_new(request):
         if form.is_valid():
             rzd_query = form.save(commit=False)
             rzd_query.save()
-            rzd_query.get_tenders()
+            try:
+                rzd_query.get_tenders()
+            except:
+                return render(request, 'tenders/tanders_not_found.html')
             return redirect('rzd_tenders_found', pk=rzd_query.pk)
     else:
         form = RzdTendersForm()
@@ -29,4 +32,5 @@ def rzd_tenders_found(request, pk):
             found_tender = tender_query.found_tenders.filter(subject__contains=request.POST.get('addition_query'))
     else:
         form = RzdTendersAdditionForm()
+
     return render(request, 'tenders/rzd_tenders_found.html', {'tender_query': tender_query, 'found_tender': found_tender, 'form': form})
