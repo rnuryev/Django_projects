@@ -1,23 +1,30 @@
-{% extends "tenders/base.html" %}
+{% extends "base.html" %}
 {% block title %}Найденные тендеры РЖД{% endblock %}
 {% block content %}
+    {% load bootstrap3 %}
     <h1>
-        <a href="{% url 'rzd_tenders_query' %}">Найденные тендеры РЖД</a>
+        <a href="#">Найденные тендеры РЖД</a>
     </h1>
-    <h3>Запрос:  {{ tender_query.query_string }}</h3>
-    <h3>Окончательный срок подачи заявок с:  {{ tender_query.bid_deadlin_from }}</h3>
+{#    <h3>Запрос:  {{ tender_query.query_string }}</h3>#}
+{#    <h3>Окончательный срок подачи заявок с:  {{ tender_query.bid_deadlin_from }}</h3>#}
     <form method="post">
         {% csrf_token %}
-        Уточнение запроса: {{ form.addition_query }}<br><br>
-        <button type="submit">Уточнить запрос</button>
+        {% bootstrap_field form.addition_query placeholder='Уточненный запрос' show_label=False %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Уточнить запрос</button>
+        {% endbuttons %}
     </form>
-    <table>
+    {% include "pagination.html" with page=found_tender %}
+    <table class="table table-bordered table-striped" id="find_tenders">
         {% for tend in found_tender %}
             <tr>
                 <td width="5%">
+                    {{ tend.etp }}
+                </td>
+                <td width="5%">
                     <a href="{{ tend.link }}">{{ tend.code }}</a>
                 </td>
-                <td width="50%">
+                <td width="45%">
                     {{ tend.subject }}
                 </td>
                 <td width="10%">
@@ -29,16 +36,45 @@
                     {{ tend.deadline }}
                 </td>
                 <td width="20%">
-                    <ul>
-                        {% for d_l in tend.document_links.all %}
-                            <li><a href="{{ d_l.doc_link }}">{{ d_l.doc_title }}</a> </li>
+                    <ul class="list_docs">
+                        {% for td in tend.document_links.all %}
+                            <li><a href="{{ td.doc_link }}">{{ td.doc_title }}</a></li>
                         {% endfor %}
-                    </ul>
+                     </ul>
 
                 </td>
             </tr>
         {% endfor %}
     </table>
 
+    {% include "pagination.html" with page=found_tender %}
+
+
+
+{#    <script>#}
+            {# Скрипт, позволяющий парсить списко документов в виде единой строки и создающий список документов в виде ссылок #}
+            {# Вместо него сделал дополнительную таблицу в БД, хранящую документы. Данная таблица связана с таблицей тендера #}
+    {#        var all_docs_array = document.getElementsByClassName('list_docs');#}
+    {#        var i;#}
+    {#        for (i=0; i<all_docs_array.length; ++i) {#}
+    {#            var text_docs = all_docs_array[i].innerHTML.trim();#}
+    {#            var arr_docs = text_docs.split('-/-');#}
+    {#            var arr_links = [];#}
+    {#            var j;#}
+    {#            for (j=0; j<arr_docs.length-1; ++j) {#}
+    {#                var arr_temp = arr_docs[j].split('--');#}
+    {#                var dl = {#}
+    {#                    'doc_name': arr_temp[0],#}
+    {#                    'doc_link': arr_temp[1]#}
+    {#                };#}
+    {#                arr_links.push(dl);#}
+    {#            }#}
+    {#            var str = '';#}
+    {#            for (j=0; j<arr_links.length; ++j) {#}
+    {#                str = str + '<li><a href="' + arr_links[j]['doc_link'] + '">' + arr_links[j]['doc_name'] + '</a></li>';#}
+    {#            }#}
+    {#            all_docs_array[i].innerHTML = str;#}
+    {#          }#}
+{#    </script>#}
 
 {% endblock %}

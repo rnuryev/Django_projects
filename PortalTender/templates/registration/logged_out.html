@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Выход из учётной записи{% endblock %}
+{% block content %}
+    {% load bootstrap3 %}
+    <h1>Выход из учётной записи (log-out)</h1>
+    <p>Вы успешно вышли из Вашей учётной записи. Вы можете <a href="{% url 'login' %}">авторизоваться</a> заново.</p>
+
+{% endblock %}

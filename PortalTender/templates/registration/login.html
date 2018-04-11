@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Авторизация{% endblock %}
+{% block content %}
+    {% load bootstrap3 %}
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h1>Авторизация (log-in)</h1>
+            {% if form.errors %}
+                <p>
+                    Ваш логин и пароль не совпадают.
+                    Поробуйте еще раз.
+                </p>
+            {% else %}
+                 <p>Пожалуйста, используйте форму ниже для авторизации:</p>
+            {% endif %}
+
+            <div class="col-md-8">
+                <form action="{% url 'login' %}" method="post">
+                    {% bootstrap_form form %}
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                    {% buttons %}
+                            <button type="submit" class="btn btn-primary">Войти</button>
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+
+{% endblock %}

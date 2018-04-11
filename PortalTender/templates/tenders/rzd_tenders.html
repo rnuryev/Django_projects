@@ -1,4 +1,4 @@
-{% extends "tenders/base.html" %}
+{% extends "base.html" %}
 {% block title %}Тендеры РЖД{% endblock %}
 {% block content %}
     <h1>Тендеры РЖД</h1>
@@ -6,13 +6,7 @@
         <h2>
             <a href="{% url 'rzd_tenders_found' pk=rzd_q.pk %}">Тендер РДЖ по запросу: {{ rzd_q.query_string }}</a>
         </h2>
-{#        <h2>#}
-{#            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>#}
-{#        </h2>#}
-{#        <p class="date">#}
-{#            Published {{ post.publish }} by {{ post.author }}#}
-{#        </p>#}
-{#        {{ post.body|truncatewords:30|linebreaks }}#}
+
     {% endfor %}
 
 {% endblock %}

@@ -1,20 +1,24 @@
-{% extends "tenders/base.html" %}
+{% extends "base.html" %}
 {% block title %}Тендеры РЖД. Новый запрос{% endblock %}
 {% block content %}
+    {% load bootstrap3 %}
     <h1>Тендеры РЖД. Новый запрос</h1>
-    <form method="post" class="post-form">
-        {% csrf_token %}
-        Адрес: {{ form.url }}<br><br>
-        Запрос: {{ form.query_string }}<br><br>
-        Дата: {{ form.bid_deadlin_from }}
-        <script>
-            $(function () {
-                $("#id_bid_deadlin_from").mask("99.99.9999", {placeholder: "дд.мм.гггг"});
-            });
+    <div class="col-md-8">
+        <form method="post" class="post-form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <script>
+                $(function () {
+                    $("#id_bid_deadlin_from").mask("99.99.9999", {placeholder: "дд.мм.гггг"});
+                });
 
-        </script>
-        <br><br>
+            </script>
+            <br><br>
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            {% endbuttons %}
+         </form>
+    </div>
 
-        <button type="submit">Сохранить</button>
-    </form>
+
 {% endblock %}

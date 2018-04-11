@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Авторизация{% endblock %}
+{% block content %}
+    {% load bootstrap3 %}
+    <div class="row">
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4">
+            <h1>Авторизация (log-in)</h1>
+            <p>Пожалуйста, используйте форму ниже для авторизации:</p>
+            <div class="col-md-2">
+                <form method="post">
+                    {% bootstrap_field form.username label="Имя пользователя"%}
+                    {% bootstrap_field form.password label="Пароль"%}
+                    {% csrf_token %}
+                    {% buttons %}
+                            <button type="submit" class="btn btn-primary">Войти</button>
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">.col-md-4</div>
+    </div>
+
+
+{% endblock %}
