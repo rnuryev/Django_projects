@@ -4,6 +4,8 @@ from .forms import RzdTendersAdditionForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+# from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+
 # Create your views here.
 
 # @login_required
@@ -32,8 +34,11 @@ def rzd_tenders_found(request):
     found_tender_all = Tenders.objects.all()
     if request.method == "POST":
         form = RzdTendersAdditionForm(request.POST)
-        if form.is_valid():
-            found_tender_all = Tenders.objects.filter(subject__contains=request.POST.get('addition_query'))
+        if 'reset' in request.POST:
+            found_tender_all = Tenders.objects.all()
+        elif 'search' in request.POST:
+            if form.is_valid():
+                found_tender_all = Tenders.objects.filter(subject__search=request.POST.get('addition_query'))
     else:
         form = RzdTendersAdditionForm()
 

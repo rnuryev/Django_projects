@@ -2,52 +2,67 @@
 {% block title %}Найденные тендеры РЖД{% endblock %}
 {% block content %}
     {% load bootstrap3 %}
-    <h1>
-        <a href="#">Найденные тендеры РЖД</a>
-    </h1>
+    <div class="container">
+        <h1>
+            <a href="#">Найденные тендеры РЖД</a>
+        </h1>
+    </div>
+
 {#    <h3>Запрос:  {{ tender_query.query_string }}</h3>#}
 {#    <h3>Окончательный срок подачи заявок с:  {{ tender_query.bid_deadlin_from }}</h3>#}
-    <form method="post">
-        {% csrf_token %}
-        {% bootstrap_field form.addition_query placeholder='Уточненный запрос' show_label=False %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary">Уточнить запрос</button>
-        {% endbuttons %}
-    </form>
-    {% include "pagination.html" with page=found_tender %}
-    <table class="table table-bordered table-striped" id="find_tenders">
-        {% for tend in found_tender %}
-            <tr>
-                <td width="5%">
-                    {{ tend.etp }}
-                </td>
-                <td width="5%">
-                    <a href="{{ tend.link }}">{{ tend.code }}</a>
-                </td>
-                <td width="45%">
-                    {{ tend.subject }}
-                </td>
-                <td width="10%">
-                    {{ tend.customer }}
-                <td width="10%">
-                    {{ tend.price }}
-                </td>
-                <td width="5%">
-                    {{ tend.deadline }}
-                </td>
-                <td width="20%">
-                    <ul class="list_docs">
-                        {% for td in tend.document_links.all %}
-                            <li><a href="{{ td.doc_link }}">{{ td.doc_title }}</a></li>
-                        {% endfor %}
-                     </ul>
+    <div class="row">
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_field form.addition_query placeholder='Уточненный запрос' show_label=False %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary" name="search">Уточнить запрос</button>
+                    <button type="submit" class="btn btn-primary" name="reset">Сброс</button>
+                {% endbuttons %}
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            {% include "pagination.html" with page=found_tender %}
+            <table class="table table-bordered table-striped" id="find_tenders">
+                {% for tend in found_tender %}
+                    <tr>
+                        <td width="5%">
+                            {{ tend.etp }}
+                        </td>
+                        <td width="5%">
+                            <a href="{{ tend.link }}">{{ tend.code }}</a>
+                        </td>
+                        <td width="45%">
+                            {{ tend.subject }}
+                        </td>
+                        <td width="10%">
+                            {{ tend.customer }}
+                        <td width="10%">
+                            {{ tend.price }}
+                        </td>
+                        <td width="5%">
+                            {{ tend.deadline }}
+                        </td>
+                        <td width="20%">
+                            <ul class="list_docs">
+                                {% for td in tend.document_links.all %}
+                                    <li><a href="{{ td.doc_link }}">{{ td.doc_title }}</a></li>
+                                {% endfor %}
+                             </ul>
 
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
 
-    {% include "pagination.html" with page=found_tender %}
+            {% include "pagination.html" with page=found_tender %}
+        </div>
+    </div>
+
+
+
 
 
 
