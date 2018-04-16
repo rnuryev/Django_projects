@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
 
 
 
@@ -141,7 +142,8 @@ class Tenders(models.Model):
     price = models.CharField(max_length=250, verbose_name=u'Цена', null=True, blank=True)
     deadline = models.CharField(max_length=20, verbose_name=u'Срок подачи заявок', null=True, blank=True)
     link = models.URLField(verbose_name=u'Ссылка', null=True, blank=True)
-    # document_links = models.CharField(max_length=5000, verbose_name=u'Тендерные документы', null=True, blank=True)
+    lots = JSONField(null=True)
+    document_links = JSONField(null=True)
     #rzd_tenders_request = models.ForeignKey(RzdTenders, related_name='found_tenders', on_delete=models.CASCADE, verbose_name=u'Запрос тендера')
 
     def __str__(self):
@@ -152,18 +154,23 @@ class Tenders(models.Model):
         verbose_name_plural = 'Тендеры'
 
 
-class TenderDocuments(models.Model):
-    doc_title = models.CharField(max_length=250, verbose_name=u'Название документа')
-    doc_link = models.URLField(verbose_name=u'Ссылка на документ')
-    tender = models.ForeignKey(Tenders, related_name='document_links', on_delete=models.CASCADE, verbose_name=u'Тендер')
+# class TenderDocuments(models.Model):
+#     doc_title = models.CharField(max_length=250, verbose_name=u'Название документа')
+#     doc_link = models.URLField(verbose_name=u'Ссылка на документ')
+#     tender = models.ForeignKey(Tenders, related_name='document_links', on_delete=models.CASCADE, verbose_name=u'Тендер')
+#
+#     def __str__(self):
+#         return 'Тендерная документация по тендеру: ' + self.tender.__str__()
+#
+#     class Meta:
+#         verbose_name = 'Документ тендера'
+#         verbose_name_plural = 'Документы тендера'
 
-    def __str__(self):
-        return 'Тендерная документация по тендеру: ' + self.tender.__str__()
-
-    class Meta:
-        verbose_name = 'Документ тендера'
-        verbose_name_plural = 'Документы тендера'
-
-
-
-
+#
+# class FavoriteTenders(models.Model):
+#     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.PROTECT)
+#     f_tender = models.ForeignKey(Tenders, verbose_name='Избранный тендер', on_delete=models.PROTECT)
+#
+#     def __str__(self):
+#         return 'Избранное' + self.user.username
+#

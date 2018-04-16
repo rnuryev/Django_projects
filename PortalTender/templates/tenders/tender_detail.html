@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Найденные тендеры РЖД{% endblock %}
+{% block content %}
+    {% load bootstrap3 %}
+    <div class="container">
+        <h2>Детальная информация по конкурсу {{ tender.code }}</h2>
+    </div>
+
+    <div class="row">
+        <div class="container">
+            <table class="table">
+                    <tr>
+                        <td width="20%"><b>ЭТП</b></td>
+                        <td width="80%">{{ tender.etp }}</td>
+                    </tr>
+                    <tr>
+                        <td width="20%"><b>Номер процедуры</b></td>
+                        <td width="80%"><a href="{{ tender.link }}">{{ tender.code }}</a></td>
+                    </tr>
+                    <tr>
+                        <td width="20%"><b>Предмет конкурса</b></td>
+                        <td width="80%">{{ tender.subject }}</td>
+                    </tr>
+                    <tr>
+                        <td width="20%"><b>Заказчик</b></td>
+                        <td width="80%">{{ tender.customer }}</td>
+                    </tr>
+                    <tr>
+                        <td width="20%"><b>Начальная (максимальная) цена договора</b></td>
+                        <td width="80%">{{ tender.price }}</td>
+                    </tr>
+                    <tr>
+                        <td width="20%"><b>Дата и время окончания подачи заявок</b></td>
+                        <td width="80%">{{ tender.deadline }}</td>
+                    </tr>
+            </table>
+            <h3>Конкурсная документация</h3>
+            <ul class="list_docs">
+                {% for td in tender.document_links %}
+                    <li><a href="{{ td.doc_link }}">{{ td.doc_name }}</a></li>
+                {% endfor %}
+            </ul>
+            <h3>Перечень лотов</h3>
+            {% if tender.lots %}
+                <table class="table table-bordered table-striped" id="tender_lots">
+                    <tr>
+                        <th>Номер лота</th>
+                        <th>Наименование лота</th>
+                        <th>Начальная (макс.) цена лота</th>
+                    </tr>
+                    {% for l in tender.lots %}
+                        <tr>
+                            <td width="10%">{{ l.num_lot }}</td>
+                            <td width="60%">{{ l.name_lot }}</td>
+                            <td width="40%">{{ l.price_lot }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}

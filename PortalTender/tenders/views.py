@@ -52,3 +52,8 @@ def rzd_tenders_found(request):
         found_tender = paginator.page(paginator.num_pages)
 
     return render(request, 'tenders/rzd_tenders_found.html', {'page': page, 'found_tender': found_tender, 'form': form})
+
+@login_required
+def tender_detail(request, pk):
+    tender = get_object_or_404(Tenders, pk=pk)
+    return render(request, 'tenders/tender_detail.html', {'tender': tender})

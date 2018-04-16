@@ -26,13 +26,21 @@
         <div class="container">
             {% include "pagination.html" with page=found_tender %}
             <table class="table table-bordered table-striped" id="find_tenders">
+                <tr>
+                    <th>ЭТП</th>
+                    <th>Номер процедуры</th>
+                    <th>Предмет конкурса</th>
+                    <th>Заказчик</th>
+                    <th>Начальная (максимальная) цена договора</th>
+                    <th>Дата и время окончания подачи заявок</th>
+                </tr>
                 {% for tend in found_tender %}
                     <tr>
                         <td width="5%">
                             {{ tend.etp }}
                         </td>
                         <td width="5%">
-                            <a href="{{ tend.link }}">{{ tend.code }}</a>
+                            <a href="{% url 'tender_detail' pk=tend.pk %}">{{ tend.code }}</a>
                         </td>
                         <td width="45%">
                             {{ tend.subject }}
@@ -44,14 +52,6 @@
                         </td>
                         <td width="5%">
                             {{ tend.deadline }}
-                        </td>
-                        <td width="20%">
-                            <ul class="list_docs">
-                                {% for td in tend.document_links.all %}
-                                    <li><a href="{{ td.doc_link }}">{{ td.doc_title }}</a></li>
-                                {% endfor %}
-                             </ul>
-
                         </td>
                     </tr>
                 {% endfor %}

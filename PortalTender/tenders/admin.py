@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tenders, TenderDocuments
+from .models import Tenders
 
 class TendersAdmin(admin.ModelAdmin):
     list_display = ('etp', 'code', 'subject', 'customer', 'deadline')
@@ -8,5 +8,5 @@ class TendersAdmin(admin.ModelAdmin):
     ordering = ['deadline']
 
 admin.site.register(Tenders, TendersAdmin)
-admin.site.register(TenderDocuments)
+# admin.site.register(TenderDocuments)
 
