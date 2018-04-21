@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Найденные тендеры РЖД{% endblock %}
+{% block content %}
+    {% load bootstrap3 %}
+    <div class="container">
+        <h1>
+            <span>Избранные конкурсы<span>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="container">
+            {% include "pagination.html" with page=found_tender %}
+            <table class="table table-bordered table-striped" id="find_tenders">
+                <tr>
+                    <th>ЭТП</th>
+                    <th>Номер процедуры</th>
+                    <th>Предмет конкурса</th>
+                    <th>Заказчик</th>
+                    <th>Начальная (максимальная) цена договора</th>
+                    <th>Дата и время окончания подачи заявок</th>
+                </tr>
+                {% for tend in tender_fav %}
+                    <tr>
+                        <td width="5%">
+                            {{ tend.etp }}
+                        </td>
+                        <td width="5%">
+                            <a href="{% url 'tender_detail' pk=tend.pk %}">{{ tend.code }}</a>
+                        </td>
+                        <td width="45%">
+                            {{ tend.subject }}
+                        </td>
+                        <td width="10%">
+                            {{ tend.customer }}
+                        <td width="10%">
+                            {{ tend.price }}
+                        </td>
+                        <td width="5%">
+                            {{ tend.deadline }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            {% include "pagination.html" with page=found_tender %}
+        </div>
+    </div>
+
+{% endblock %}

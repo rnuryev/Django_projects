@@ -149,6 +149,7 @@ class Tenders(models.Model):
     def __str__(self):
         return 'Тендер №:' + self.code
 
+
     class Meta:
         verbose_name = 'Тендер'
         verbose_name_plural = 'Тендеры'
@@ -166,11 +167,14 @@ class Tenders(models.Model):
 #         verbose_name = 'Документ тендера'
 #         verbose_name_plural = 'Документы тендера'
 
-#
-# class FavoriteTenders(models.Model):
-#     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.PROTECT)
-#     f_tender = models.ForeignKey(Tenders, verbose_name='Избранный тендер', on_delete=models.PROTECT)
-#
-#     def __str__(self):
-#         return 'Избранное' + self.user.username
-#
+
+class FavoriteTenders(models.Model):
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.PROTECT)
+    fav_tender = models.ForeignKey(Tenders, verbose_name='Избранный тендер', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return 'Избранное ' + self.user.username + '. Тендер № ' + self.fav_tender.code
+
+    class Meta:
+        verbose_name = 'Избранное'
+        verbose_name_plural = 'Избранное'

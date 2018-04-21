@@ -15,7 +15,7 @@
                     </tr>
                     <tr>
                         <td width="20%"><b>Номер процедуры</b></td>
-                        <td width="80%"><a href="{{ tender.link }}">{{ tender.code }}</a></td>
+                        <td width="80%">{{ tender.code }}</td>
                     </tr>
                     <tr>
                         <td width="20%"><b>Предмет конкурса</b></td>
@@ -60,5 +60,62 @@
 
         </div>
     </div>
+{#    <div class="container">#}
+{#        {% buttons %}#}
+{#            <a href="{% url 'add_remove_favorite' tender.pk%}"><button class="btn btn-primary" name="add_revove">В избранное</button></a>#}
+{#        {% endbuttons %}#}
+{#    </div>#}
+    
+
+    <div class="container">
+        <button class="btn btn-primary" name="add_remove" id="add_remove_button">В избранное</button>
+        <a href="{{ tender.link }}" target="_blank"><button class="btn btn-primary" name="open_link" id="open_link">Открыть на площадке</button></a>
+    </div>
+
+    <script>
+        $.ajax({
+                url: '{% url 'in_favorite' tender.pk %}',
+                type: 'GET',
+                success: function (json) {
+                    document.getElementById('add_remove_button').innerHTML = json.button_name;
+                }
+        });
+    </script>
+
+
+    <script>
+        function change_buttom_name() {
+            var name_but = document.getElementById('add_remove_button').innerHTML
+            if (name_but === 'В избранное') {
+                name_but = 'Убрать из избранного';
+            }
+            else {
+                name_but = 'В избранное';
+            }
+            document.getElementById('add_remove_button').innerHTML = name_but;
+        }
+
+        function show_alert(text) {
+            document.getElementById('message_p').innerHTML = text;
+            document.getElementById('message_div').className = 'container';
+            setTimeout(function () {
+                 document.getElementById('message_div').className = 'container hidden';
+            }, 5000);
+
+        }
+
+        document.getElementById('add_remove_button').onclick = function () {
+             $.ajax({
+                url: '{% url 'add_remove_favorite' tender.pk %}',
+                type: 'GET',
+                success: function (json) {
+                    show_alert(json.result);
+                }
+            });
+             change_buttom_name();
+
+        };
+
+     </script>
 
 {% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Поиск тендеров{% endblock %}
+{% block content %}
+    {% load bootstrap3 %}
+    {% load static %}
+    <div class="container" align="center">
+        <h2>Поиск конкурсов по площадкам</h2>
+    </div>
+    <div class="row">
+        <div class="container">
+            <a href="{% url 'rzd_tenders_found' %}"><img src="{% static 'logo/rzd_link.jpg' %}"/></a>
+        </div>
+    </div>
+
+{% endblock %}

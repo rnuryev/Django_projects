@@ -6,6 +6,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <!-- Подключение jQuery плагина Masked Input -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>#}
+{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
     {% load bootstrap3 %}
     {% bootstrap_css %}
     {% bootstrap_javascript  %}
@@ -43,9 +46,20 @@
       <a class="navbar-brand" href="#">МоиТендеры</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="{% url 'rzd_tenders_found' %}">Все тенедры</a></li>
-      <li><a href="#">Page 2</a></li>
+      <li class="active"><a href="{% url 'dashboard' %}">Home</a></li>
+      <li><a href="{% url 'favorites' %}">Избранное</a></li>
+      <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Выбор площадки<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="{% url 'rzd_tenders_found' %}">РЖД</a></li>
+              <li><a href="#">Ростех</a></li>
+              <li><a href="#">Россети</a></li>
+              <li><a href="#">Газпром</a></li>
+              <li><a href="#">Ростатом</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+          </ul>
+      </li>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
@@ -58,6 +72,13 @@
     </ul>
   </div>
 </nav>
+
+<div class="container hidden" id="message_div">
+    <div class="alert alert-success alert-dismissable fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <p id="message_p">sd</p>
+    </div>
+</div>
 
 
 <div id="content">
