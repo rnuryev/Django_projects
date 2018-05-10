@@ -140,7 +140,7 @@ class Tenders(models.Model):
     subject = models.CharField(max_length=2500, verbose_name=u'Предмет', null=True, blank=True)
     customer = models.CharField(max_length=250, verbose_name=u'Заказчик', null=True, blank=True)
     price = models.CharField(max_length=250, verbose_name=u'Цена', null=True, blank=True)
-    deadline = models.CharField(max_length=20, verbose_name=u'Срок подачи заявок', null=True, blank=True)
+    deadline = models.DateField(verbose_name=u'Срок подачи заявок', null=True, blank=True)
     link = models.URLField(verbose_name=u'Ссылка', null=True, blank=True)
     lots = JSONField(null=True)
     document_links = JSONField(null=True)

@@ -10,7 +10,9 @@
 
     <div class="row">
         <div class="container">
-            {% include "pagination.html" with page=found_tender %}
+
+            {% include "pagination.html" with page=tender_fav %}
+
             <table class="table table-bordered table-striped" id="find_tenders">
                 <tr>
                     <th>ЭТП</th>
@@ -43,7 +45,9 @@
                 {% endfor %}
             </table>
 
-            {% include "pagination.html" with page=found_tender %}
+
+            {% include "pagination.html" with page=tender_fav %}
+
         </div>
     </div>
 

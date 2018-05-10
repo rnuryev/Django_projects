@@ -96,4 +96,13 @@ def favorites(request):
     tender_fav = []
     for uf in user_favorite:
         tender_fav.append(uf.fav_tender)
-    return render(request, 'tenders/favorites.html', {'tender_fav': tender_fav})
+    paginator = Paginator(tender_fav, 25)
+    page = request.GET.get('page')
+    try:
+        tender_fav = paginator.page(page)
+    except PageNotAnInteger:
+        tender_fav = paginator.page(1)
+    except EmptyPage:
+        tender_fav = paginator.page(paginator.num_pages)
+
+    return render(request, 'tenders/favorites.html', {'page': page, 'tender_fav': tender_fav})
