@@ -13,14 +13,19 @@ def dashboard(request):
 
 @login_required
 def rzd_tenders_found(request):
-    found_tender_all = Tenders.objects.all()
+    addition_query = request.GET.get('addition_query')
+    if addition_query:
+        found_tender_all = Tenders.objects.filter(etp='РЖД').filter(subject__search=addition_query)
+    else:
+        found_tender_all = Tenders.objects.filter(etp='РЖД')
     if request.method == "POST":
         form = RzdTendersAdditionForm(request.POST)
         if 'reset' in request.POST:
-            found_tender_all = Tenders.objects.all()
+            found_tender_all = Tenders.objects.filter(etp='РЖД')
         elif 'search' in request.POST:
             if form.is_valid():
-                found_tender_all = Tenders.objects.filter(subject__search=request.POST.get('addition_query'))
+                addition_query = request.POST.get('addition_query')
+                found_tender_all = Tenders.objects.filter(etp='РЖД').filter(subject__search=addition_query)
     else:
         form = RzdTendersAdditionForm()
 
@@ -33,7 +38,95 @@ def rzd_tenders_found(request):
     except EmptyPage:
         found_tender = paginator.page(paginator.num_pages)
 
-    return render(request, 'tenders/rzd_tenders_found.html', {'page': page, 'found_tender': found_tender, 'form': form})
+    return render(request, 'tenders/rzd_tenders_found.html', {'page': page, 'found_tender': found_tender, 'form': form, 'addition_query': addition_query})
+
+@login_required
+def rosseti_tenders_found(request):
+    addition_query = request.GET.get('addition_query')
+    if addition_query:
+        found_tender_all = Tenders.objects.filter(etp='Россети').filter(subject__search=addition_query)
+    else:
+        found_tender_all = Tenders.objects.filter(etp='Россети')
+    if request.method == "POST":
+        form = RzdTendersAdditionForm(request.POST)
+        if 'reset' in request.POST:
+            found_tender_all = Tenders.objects.filter(etp='Россети')
+        elif 'search' in request.POST:
+            if form.is_valid():
+                addition_query = request.POST.get('addition_query')
+                found_tender_all = Tenders.objects.filter(etp='Россети').filter(subject__search=addition_query)
+    else:
+        form = RzdTendersAdditionForm()
+
+    paginator = Paginator(found_tender_all, 25)
+    page = request.GET.get('page')
+    try:
+        found_tender = paginator.page(page)
+    except PageNotAnInteger:
+        found_tender = paginator.page(1)
+    except EmptyPage:
+        found_tender = paginator.page(paginator.num_pages)
+
+    return render(request, 'tenders/rosseti_tenders_found.html', {'page': page, 'found_tender': found_tender, 'form': form, 'addition_query': addition_query})
+
+@login_required
+def gazprom_tenders_found(request):
+    addition_query = request.GET.get('addition_query')
+    if addition_query:
+        found_tender_all = Tenders.objects.filter(etp='Газпром').filter(subject__search=addition_query)
+    else:
+        found_tender_all = Tenders.objects.filter(etp='Газпром')
+    if request.method == "POST":
+        form = RzdTendersAdditionForm(request.POST)
+        if 'reset' in request.POST:
+            found_tender_all = Tenders.objects.filter(etp='Газпром')
+        elif 'search' in request.POST:
+            if form.is_valid():
+                addition_query = request.POST.get('addition_query')
+                found_tender_all = Tenders.objects.filter(etp='Газпром').filter(subject__search=addition_query)
+    else:
+        form = RzdTendersAdditionForm()
+
+    paginator = Paginator(found_tender_all, 25)
+    page = request.GET.get('page')
+    try:
+        found_tender = paginator.page(page)
+    except PageNotAnInteger:
+        found_tender = paginator.page(1)
+    except EmptyPage:
+        found_tender = paginator.page(paginator.num_pages)
+
+    return render(request, 'tenders/gazprom_tenders_found.html', {'page': page, 'found_tender': found_tender, 'form': form, 'addition_query': addition_query})
+
+@login_required
+def all_tenders(request):
+    addition_query = request.GET.get('addition_query')
+    if addition_query:
+        found_tender_all = Tenders.objects.all().filter(subject__search=addition_query)
+    else:
+        found_tender_all = Tenders.objects.all()
+    if request.method == "POST":
+        form = RzdTendersAdditionForm(request.POST)
+        if 'reset' in request.POST:
+            found_tender_all = Tenders.objects.all()
+        elif 'search' in request.POST:
+            if form.is_valid():
+                addition_query = request.POST.get('addition_query')
+                found_tender_all = Tenders.objects.all().filter(subject__search=addition_query)
+    else:
+        form = RzdTendersAdditionForm()
+
+    paginator = Paginator(found_tender_all, 25)
+    page = request.GET.get('page')
+    try:
+        found_tender = paginator.page(page)
+    except PageNotAnInteger:
+        found_tender = paginator.page(1)
+    except EmptyPage:
+        found_tender = paginator.page(paginator.num_pages)
+
+    return render(request, 'tenders/all_tenders.html', {'page': page, 'found_tender': found_tender, 'form': form, 'addition_query': addition_query})
+
 
 @login_required
 def tender_detail(request, pk):
@@ -106,3 +199,4 @@ def favorites(request):
         tender_fav = paginator.page(paginator.num_pages)
 
     return render(request, 'tenders/favorites.html', {'page': page, 'tender_fav': tender_fav})
+

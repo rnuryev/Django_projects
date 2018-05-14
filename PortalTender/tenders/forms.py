@@ -8,5 +8,5 @@ from django import forms
 #         fields = ('url', 'query_string', 'bid_deadlin_from')
 
 class RzdTendersAdditionForm(forms.Form):
-    addition_query = forms.CharField(max_length=350)
+    addition_query = forms.CharField(max_length=350, required=False)
 

@@ -143,8 +143,8 @@ def get_page_data(url, token, cookie, id):
                 dl['doc_name'] = i['name']
                 dl['doc_link'] = 'https://etp.rosseti.ru' + i['link']
                 document_links.append(dl)
-        else:
-            tender_detail = ''
+        # else:
+        #     tender_detail = ''
     except:
         document_links = []
     try:
@@ -184,69 +184,3 @@ if __name__ == '__main__':
 
     for i in atl:
         get_page_data(url, token1, ck1, i['id'])
-
-
-
-
-
-
-
-
-
-
-
-
-
-# print(len(atl))
-# print(atl)
-
-# data_for_tends = [{"action":"Procedure","method":"list","data":[{"sort":"id","dir":"DESC"}],"type":"rpc","tid":3,"token":token},{"action":"Reference","method":"regionslist","data":[{"sort":"name","dir":"ASC"}],"type":"rpc","tid":4,"token":token}]
-# data_2 = {"action":"Procedure","method":"list","data":[{"start":150,"limit":25,"sort":"id","dir":"DESC"}],"type":"rpc","tid":8,"token":token}
-
-
-#data_tenders_actual = {"action":"Procedure","method":"list","data":[{"sort":"id","dir":"DESC","procedure_type":0,"status":2,"organizer":"","organizer_region":None,"title_like":"","for_small_or_middle":False,"date_end_registration_from":date_filter_tenders.strftime('%Y-%m-%dT19:00:00.000Z'),"date_end_registration_till":"","start_price_from":None,"start_price_till":None,"date_begin_auction_from":"","date_begin_auction_till":"","customer":"","department_id":"","registry_number_like":"","subcontractors_requirement":False,"query":""}],"type":"rpc","tid":17,"token":token}
-
-#Сделать перебор страниц для получения всех тендеров по запросу
-
-
-
-#
-# total_page = resp['result']['totalCount']
-# iter_count = int(total_page / 25 + 1)
-#
-#
-# print(len(test))
-# print(total_page, iter_count)
-# print(test)
-# for i in range(1, iter_count+1):
-#     start_count = i*25
-#     data_666 = {"action": "Procedure",
-#                 "method": "list",
-#                 "data": [{"start": start_count,
-#                           "limit": 25,
-#                           "sort": "id",
-#                           "dir": "DESC",
-#                           "procedure_type": 0,
-#                           "status": 2,
-#                           "organizer": "",
-#                           "organizer_region": None,
-#                           "title_like": "",
-#                           "for_small_or_middle": False,
-#                           "date_end_registration_from": date_filter_tenders.strftime('%Y-%m-%dT19:00:00.000Z'),
-#                           "date_end_registration_till": "",
-#                           "start_price_from": None,
-#                           "start_price_till": None,
-#                           "date_begin_auction_from": "",
-#                           "date_begin_auction_till": "",
-#                           "customer": "",
-#                           "department_id": "",
-#                           "registry_number_like": "",
-#                           "subcontractors_requirement": False,
-#                           "query": ""}],
-#                 "type": "rpc",
-#                 "tid": 22,
-#                 "token": token}
-#
-#     resp = json.loads(requests.post(url, data=json.dumps(data_666), headers = head, cookies=ck, verify=False).text)
-#     test = resp['result']['procedures']
-#     print(test)

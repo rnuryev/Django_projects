@@ -6,9 +6,17 @@
     <div class="container" align="center">
         <h2>Поиск конкурсов по площадкам</h2>
     </div>
-    <div class="row">
-        <div class="container">
-            <a href="{% url 'rzd_tenders_found' %}"><img src="{% static 'logo/rzd_link.jpg' %}"/></a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3" style="text-align: center">
+                <a href="{% url 'rzd_tenders_found' %}"><img src="{% static 'logo/rzd_link.jpg' %}"/></a>
+            </div>
+            <div class="col-md-3" style="text-align: center">
+                <a href="{% url 'rosseti_tenders_found' %}"><img src="{% static 'logo/rosseti_logo.jpg' %}"/></a>
+            </div>
+            <div class="col-md-3" style="text-align: center">
+                <a href="{% url 'gazprom_tenders_found' %}"><img src="{% static 'logo/gazprom_logo.jpg' %}"/></a>
+            </div>
         </div>
     </div>
 

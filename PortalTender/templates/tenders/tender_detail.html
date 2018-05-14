@@ -27,7 +27,7 @@
                     </tr>
                     <tr>
                         <td width="20%"><b>Начальная (максимальная) цена договора, руб.</b></td>
-                        <td width="80%">{{ tender.price }}</td>
+                        <td class="money" width="80%">{{ tender.price }}</td>
                     </tr>
                     <tr>
                         <td width="20%"><b>Дата и время окончания подачи заявок</b></td>
@@ -52,7 +52,7 @@
                         <tr>
                             <td width="10%">{{ l.num_lot }}</td>
                             <td width="60%">{{ l.name_lot }}</td>
-                            <td width="40%">{{ l.price_lot }}</td>
+                            <td class="money" width="40%">{{ l.price_lot }}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -117,5 +117,11 @@
         };
 
      </script>
+
+    <script>
+        $(document).ready(function(){
+            $('.money').mask('000 000 000 000 000,00 руб.', {reverse: true});
+            });
+    </script>
 
 {% endblock %}
