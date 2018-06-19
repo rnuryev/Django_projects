@@ -13,7 +13,7 @@ def write_db(data):
             cur.execute("SELECT * FROM public.tenders_tenders WHERE code=%s", (data['code'],))
             result = cur.fetchall()
             if not result:
-                cur.execute("INSERT INTO public.tenders_tenders (etp, code, subject, customer, price, deadline, link, lots, document_links) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                cur.execute("INSERT INTO public.tenders_tenders (etp, code, subject, customer, price, deadline, link, lots, document_links, in_favorite) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, FALSE)",
                         (data['etp'], data['code'], data['subject'], data['customer'], data['price'], datetime.datetime.strptime(data['deadline'][0:10], '%Y-%m-%d').date(), data['link'], json.dumps(data['lots']), json.dumps(data['document_links'])))
 
 def get_token_cookies(url, data):
@@ -121,7 +121,7 @@ def get_page_data(url, token, cookie, id):
     try:
         deadline = resp['result']['procedure']['date_end_registration']
     except:
-        deadline = ''
+        deadline = '1900-01-01'
     try:
         link = resp['result']['procedure']['url']
     except:

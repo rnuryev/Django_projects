@@ -10,6 +10,7 @@ urlpatterns = [
     path('rzd/', views.rzd_tenders_found, name='rzd_tenders_found'),
     path('rosseti/', views.rosseti_tenders_found, name='rosseti_tenders_found'),
     path('gazprom/', views.gazprom_tenders_found, name='gazprom_tenders_found'),
+    path('rosatom/', views.rosatom_tenders_found, name='rosatom_tenders_found'),
     path('<int:pk>/', views.tender_detail, name='tender_detail'),
     path('add_remove_favorite/<int:pk>/', views.add_remove_favorite, name='add_remove_favorite'),
     path('in_favorite/<int:pk>/', views.in_favorite, name='in_favorite'),

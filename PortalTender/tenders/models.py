@@ -144,6 +144,7 @@ class Tenders(models.Model):
     link = models.URLField(verbose_name=u'Ссылка', null=True, blank=True)
     lots = JSONField(null=True)
     document_links = JSONField(null=True)
+    in_favorite = models.BooleanField(default=False)
     #rzd_tenders_request = models.ForeignKey(RzdTenders, related_name='found_tenders', on_delete=models.CASCADE, verbose_name=u'Запрос тендера')
 
     def __str__(self):

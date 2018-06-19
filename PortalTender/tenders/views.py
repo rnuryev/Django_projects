@@ -70,6 +70,37 @@ def rosseti_tenders_found(request):
     return render(request, 'tenders/rosseti_tenders_found.html', {'page': page, 'found_tender': found_tender, 'form': form, 'addition_query': addition_query})
 
 @login_required
+def rosatom_tenders_found(request):
+    addition_query = request.GET.get('addition_query')
+    if addition_query:
+        found_tender_all = Tenders.objects.filter(etp='Росатом').filter(subject__search=addition_query)
+    else:
+        found_tender_all = Tenders.objects.filter(etp='Росатом')
+    if request.method == "POST":
+        form = RzdTendersAdditionForm(request.POST)
+        if 'reset' in request.POST:
+            found_tender_all = Tenders.objects.filter(etp='Росатом')
+        elif 'search' in request.POST:
+            if form.is_valid():
+                addition_query = request.POST.get('addition_query')
+                found_tender_all = Tenders.objects.filter(etp='Росатом').filter(subject__search=addition_query)
+    else:
+        form = RzdTendersAdditionForm()
+
+    paginator = Paginator(found_tender_all, 25)
+    page = request.GET.get('page')
+    try:
+        found_tender = paginator.page(page)
+    except PageNotAnInteger:
+        found_tender = paginator.page(1)
+    except EmptyPage:
+        found_tender = paginator.page(paginator.num_pages)
+
+    return render(request, 'tenders/rosatom_tenders_found.html', {'page': page, 'found_tender': found_tender, 'form': form, 'addition_query': addition_query})
+
+
+
+@login_required
 def gazprom_tenders_found(request):
     addition_query = request.GET.get('addition_query')
     if addition_query:
@@ -154,9 +185,13 @@ def add_remove_favorite(request, pk):
     try:
         fav_tend = FavoriteTenders.objects.get(user=user, fav_tender=tender)
         fav_tend.delete()
+        tender.in_favorite = False
+        tender.save()
         result = 'Удалено из избранного'
     except FavoriteTenders.DoesNotExist:
         fav_tend = FavoriteTenders.objects.create(user=user, fav_tender=tender)
+        tender.in_favorite = True
+        tender.save()
         fav_tend.save()
         result = 'Добавленов в избранное'
 

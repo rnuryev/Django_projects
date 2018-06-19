@@ -6,12 +6,13 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <!-- Подключение jQuery плагина Masked Input -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
 {#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>#}
 {#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
     {% load bootstrap3 %}
     {% bootstrap_css %}
+    {% block static_files %}{% endblock %}
     {% bootstrap_javascript  %}
     <title>{% block title %}{% endblock %}</title>
 </head>
@@ -57,8 +58,7 @@
               <li><a href="{% url 'rzd_tenders_found' %}">РЖД</a></li>
               <li><a href="{% url 'rosseti_tenders_found' %}">Россети</a></li>
               <li><a href="{% url 'gazprom_tenders_found' %}">Газпром</a></li>
-              <li><a href="#">Ростех</a></li>
-              <li><a href="#">Ростатом</a></li>
+              <li><a href="{% url 'rosatom_tenders_found' %}">Ростатом</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#">Separated link</a></li>
           </ul>

@@ -3,27 +3,26 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/table_of_tenders.css' %}">
 {% endblock %}
-{% block title %}Найденные тендеры РЖД{% endblock %}
+{% block title %}Найденные тендеры Росатома{% endblock %}
 {% block content %}
     {% load bootstrap3 %}
+
     <script>
 
-            function add_remove_favorite(pkk) {
-                $.ajax({
-                    url: "{% url 'add_remove_favorite' 12345 %}".replace('12345', pkk),
-                    type: 'GET',
-                });
+        function add_remove_favorite(pkk) {
+            $.ajax({
+                url: "{% url 'add_remove_favorite' 12345 %}".replace('12345', pkk),
+                type: 'GET',
+            });
 
-            };
+        };
     </script>
     <div class="container">
         <h1>
-            <span>Конкурсы РЖД<span>
+            <span>Конкурсы Росатома<span>
         </h1>
     </div>
 
-{#    <h3>Запрос:  {{ tender_query.query_string }}</h3>#}
-{#    <h3>Окончательный срок подачи заявок с:  {{ tender_query.bid_deadlin_from }}</h3>#}
     <div class="row">
         <div class="container">
             <form method="post">
@@ -91,5 +90,6 @@
             $('.money').mask('000 000 000 000 000,00 руб.', {reverse: true});
             });
     </script>
+
 
 {% endblock %}

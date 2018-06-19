@@ -1,7 +1,21 @@
 {% extends "base.html" %}
+{% block static_files %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/table_of_tenders.css' %}">
+{% endblock %}
 {% block title %}Найденные тендеры РЖД{% endblock %}
 {% block content %}
     {% load bootstrap3 %}
+    <script>
+
+            function add_remove_favorite(pkk) {
+                $.ajax({
+                    url: "{% url 'add_remove_favorite' 12345 %}".replace('12345', pkk),
+                    type: 'GET',
+                });
+
+            };
+    </script>
     <div class="container">
         <h1>
             <span>Избранные конкурсы<span>
@@ -15,6 +29,9 @@
 
             <table class="table table-bordered table-striped" id="find_tenders">
                 <tr>
+                    <th>
+                        <span class="glyphicon glyphicon-star" aria-hidden="true" style="display: block; text-align: center"></span>
+                    </th>
                     <th>ЭТП</th>
                     <th>Номер процедуры</th>
                     <th>Предмет конкурса</th>
@@ -24,13 +41,20 @@
                 </tr>
                 {% for tend in tender_fav %}
                     <tr>
+                        <td width="5%" align="left" style="padding-left: 1.5%">
+                            {% if tend.in_favorite %}
+                                <input class="star" id="checkBox" type="checkbox" checked onchange="add_remove_favorite({{ tend.pk }})">
+                            {% else %}
+                                <input class="star" id="checkBox" type="checkbox" onchange="add_remove_favorite({{ tend.pk }})">
+                            {% endif %}
+                        </td>
                         <td width="5%">
                             {{ tend.etp }}
                         </td>
                         <td width="5%">
                             <a href="{% url 'tender_detail' pk=tend.pk %}">{{ tend.code }}</a>
                         </td>
-                        <td width="45%">
+                        <td width="40%">
                             {{ tend.subject }}
                         </td>
                         <td width="10%">

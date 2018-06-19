@@ -36,7 +36,7 @@ def write_db(data):
             cur.execute("SELECT * FROM public.tenders_tenders WHERE code=%s", (data['code'],))
             result = cur.fetchall()
             if not result:
-                cur.execute("INSERT INTO public.tenders_tenders (etp, code, subject, customer, price, deadline, link, lots, document_links) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                cur.execute("INSERT INTO public.tenders_tenders (etp, code, subject, customer, price, deadline, link, lots, document_links, in_favorite) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, FALSE)",
                         (data['etp'], data['code'], data['subject'], data['customer'], data['price'], datetime.datetime.strptime(data['deadline'][0:10], '%d.%m.%Y').date(), data['link'], json.dumps(data['lots']), json.dumps(data['document_links'])))
 
 def get_page_data(url):
@@ -73,7 +73,7 @@ def get_page_data(url):
         else:
             deadline = spans_tender_info[6].text.strip()
     except:
-        deadline = ''
+        deadline = '01.01.1900'
     try:
         link = url
     except:
