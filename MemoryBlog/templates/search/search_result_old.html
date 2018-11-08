@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}Результаты поиска{% endblock %}
+{% block content %}
+    <h1>Поиск</h1>
+    {% if posts %}
+        {% for post in posts %}
+            <article>
+                <a href="{{ post.get_absolute_url }}">
+                    <h2>{{ post.title }}</h2>
+                </a>
+                {{ post.short_description|safe }}
+                <p><a class="btn btn-default btn-sm" href="{{ post.get_absolute_url }}">Читать далее</a></p>
+            </article>
+        {% endfor %}
+        {% bootstrap_pagination posts url=last_question %}
+    {% else %}
+        <p>Не найдено публикаций по вашему запросу<br>Попробуйте повторить запрос с другой формулировкой</p>
+    {% endif %}
+{#    {% include "pagination.html" with page=posts %}#}
+
+{% endblock %}

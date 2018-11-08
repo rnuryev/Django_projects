@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+{% load blog_extras %}
+{% load socialaccount %}
+{% load account %}
+
+{% block title %}{{ post.seo_title }} | Чердак воспоминаний{% endblock %}
+{% block seo %}
+    <meta name="keywords" content="{{ post.seo_keywords }}">
+    <meta name="description" content="{{ post.seo_desription }}">
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="single-blog blog-details two-column">
+                <div class="post-thumb">
+                    <img src="{{ post.head_image.url }}" class="img-responsive" alt="">
+                </div>
+                <div class="post-content overflow">
+                    <h1 class="post-title bold">{{ post.article_title }}</h1>
+                    <h5 class="post-author">Опубликовано {{ post.date | date:"d.m.Y" }}. Автор: <a href="{% url 'post_list_by_author' post.author %}"> {{ post.author.first_name }}</a></h5>
+                    <br>
+                    <p>{{ post.content|safe }}</p>
+                    <div class="post-bottom overflow">
+                        <ul class="nav navbar-nav post-nav">
+                            <li><a href="{% url 'post_list_by_sec' post.section.sec_slug %}"><i class="fa fa-book"></i>{{ post.section }}</a></li>
+                            <li><a href="{% url 'post_list_by_sec_and_subsec' post.section.sec_slug post.subsection.subsec_slug %}"><i class="fa fa-tag"></i>{{ post.subsection }}</a></li>
+
+                            <li><a href="#post-comments"><i class="fa fa-comments"></i> {% get_comments_count post.id %}</a></li>
+                        </ul>
+                    </div>
+                    <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+                    <script src="//yastatic.net/share2/share.js"></script>
+                    <div class="ya-share2" id="share-it" data-services="collections,vkontakte,facebook,odnoklassniki,twitter"></div>
+                    <div class="response-area">
+                        <h2 class="bold" id="post-comments">Комментарии</h2>
+
+                        {% for comment in comments %}
+                            <a name="comment-{{ comment.id }}"></a>
+                            <div class="row" id="{{ comment.id }}">
+                                <div class="col-md-{{ comment.get_col }} col-md-offset-{{ comment.get_offset }}">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <strong>{{ comment.author_id.get_full_name|default:comment.author_id.username }}</strong>&nbsp;&nbsp;
+                                            {{ comment.pub_date }}
+                                            <a href="#comment-{{ comment.id }}">#</a>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div>{{ comment.content|safe }}</div>
+                                            {% if form %}<a class="btn btn-default btn-xs pull-right"
+                                                            onclick="return show_comments_form({{ comment.id }})">
+                                                {% bootstrap_icon "share-alt" %}&nbsp;&nbsp;Ответить</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% if form %}
+                            <h3 id="write_comment"><a onclick="return show_comments_form('write_comment')">Написать комментарий</a></h3>
+                            <form id="comment_form" action="{% url 'add_comment' post.id %}" method="post">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            {% buttons %}
+                                <button type="submit" class="btn btn-primary">{% bootstrap_icon "comment" %}&nbsp;&nbsp;Комментировать</button>
+                            {% endbuttons %}
+                            </form>
+                        {% else %}
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Комментарии</h3>
+                                </div>
+                                <div class="panel-body">
+                                    Только авторизованные пользователи могут оставлять комментарии.<br>Авторизуйтесь с помощью социальных сетей: <a href="{% provider_login_url "google" method="oauth2" %}">Google</a>, <a href="{% provider_login_url "vk" method="oauth2" %}">Вконтакте</a> или <a href="{% provider_login_url "mailru" method="oauth2" %}">Mail.ru</a><br />
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    <script>
+                        function show_comments_form(parent_comment_id)
+                            {
+                                if (parent_comment_id == 'write_comment')
+                                {
+                                    $("#id_parent_comment").val('')
+                                }
+                                else
+                                {
+                                    $("#id_parent_comment").val(parent_comment_id);
+                                }
+                                $("#comment_form").insertAfter("#" + parent_comment_id);
+                            }
+                    </script>
+
+                    </div><!--/Response-area-->
+                    </div>
+                            </div>
+        </div>
+    </div>
+
+{% endblock %}

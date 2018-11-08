@@ -126,20 +126,12 @@ def delete_old_tenders():
     conn.commit()
     conn.close()
 
-if __name__ == '__main__':
+
+def run_it():
     url = 'http://etzp.rzd.ru/freeccee/main?ACTION=searchProc'
     name_text = None
-    # Срок подачи заявок "с":
     bid_deadlin_from = date.today().strftime('%d.%m.%Y')
     TYPE_SELECTS = ('OC_CKZ', 'OC_TWOSTAGE', 'OA_CKZ', 'ZK_CKZ', 'RO_CKZ')
-    #TYPE_SECECTS = ('RO_CKZ',)
-    # p_type_select = OC_CKZ #Открытый конкурс
-    # p_type_select = OC_TWOSTAGE #Открытый двухэтапный конкурс
-    # p_type_select = OA_CKZ #Открытый аукцион
-    # p_type_select = ZK_CKZ%7CZK_RZDS #Запрос котировок
-    # p_type_select = RO_CKZ #Запрос предложений
-    # p_type_select = PQS_CKZ%7CPQS_UNLIMITED #Предварительный квалификационный отбор
-    # p_type_select = QS_CKZ%7CQS_RZDS #Конкурс среди предприятий, прошедших квалификационный отбор
 
     all_links = []
     for p_type in TYPE_SELECTS:
@@ -177,6 +169,9 @@ if __name__ == '__main__':
             page_links = get_all_links(url, data)
             all_links.extend(page_links)
 
-
     with Pool(20) as po:
         po.map(get_page_data, all_links)
+
+
+if __name__ == '__main__':
+    run_it()

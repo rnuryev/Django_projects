@@ -59,7 +59,7 @@
                         </td>
                         <td width="10%">
                             {{ tend.customer }}
-                        <td width="10%">
+                        <td width="10%" class="money">
                             {{ tend.price }}
                         </td>
                         <td width="5%">
@@ -74,5 +74,11 @@
 
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $('.money').mask('000 000 000 000 000,00 руб.', {reverse: true});
+            });
+    </script>
 
 {% endblock %}

@@ -1,0 +1,239 @@
+{% load staticfiles %}
+{% load static %}
+{% load socialaccount %}
+{% load account %}
+{% load blog_extras %}
+{#{% load bootstrap3 %}#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block seo %}{% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/lightbox.css" %}" rel="stylesheet">
+    <link href="{% static "css/animate.min.css" %}" rel="stylesheet">
+	<link href="{% static "css/main.css" %}" rel="stylesheet">
+	<link href="{% static "css/responsive.css" %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;subset=cyrillic-ext" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <!--[if lt IE 9]>
+	    <script src="{% static "js/html5shiv.js" %}"></script>
+	    <script src="{% static "js/respond.min.js" %}"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="{% static 'images/ico/favicon48.ico' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'images/ico/apple-touch-icon-144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/ico/apple-touch-icon-114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'images/ico/apple-touch-icon-72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'images/ico/apple-touch-icon-57-precomposed.png' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head><!--/head-->
+
+<body>
+	<header id="header">      
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 overflow">
+                   <div class="social-icons pull-right">
+                        <ul class="nav nav-pills">
+                            {% if request.user.is_authenticated %}
+                                <li>Добрый день, {{ request.user.first_name }}!</li>
+                            {% else %}
+                                <li>Авторизуйтесь с помощью социальных сетей!</li>
+                            {% endif %}
+{#                            <li><a href=""><i class="fab fa-facebook"></i></a></li>#}
+{#                            <li><a href=""><i class="fab fa-odnoklassniki"></i></a></li>#}
+                            <li><a href="{% provider_login_url "google" method="oauth2" %}"><i class="fab fa-google"></i></a></li>
+                            <li><a href="{% provider_login_url "vk" method="oauth2" %}"><i class="fab fa-vk"></i></a></li>
+                            <li><a href="{% provider_login_url "mailru" method="oauth2" %}"><i class="fas fa-at"></i></a></li>
+                            {% if request.user.is_authenticated %}
+                                <li><a href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+             </div>
+        </div>
+        <div class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+{#                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">#}
+{#                        <span class="sr-only">Toggle navigation</span>#}
+{#                        <span class="icon-bar"></span>#}
+{#                        <span class="icon-bar"></span>#}
+{#                        <span class="icon-bar"></span>#}
+{#                    </button>#}
+
+                    <a class="navbar-brand" href="{% url 'post_list' %}">
+                        <img src="{% static "images/logo3_750.png" %}" alt="logo">
+                    </a>
+                    
+                </div>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right" style="margin-top: 20px">
+                        {% get_all_section as all_sections %}
+                        {% for sec_m in all_sections %}
+                            <li class="dropdown"><a href="{% url 'post_list_by_sec' sec_m.sec_slug %}">{{ sec_m }}{% if sec_m.has_subsection %}<i class="fa fa-angle-down"></i>{% endif %}</a>
+                            {% get_all_subsection_in_section sec_m as all_subsections %}
+                            {% if sec_m.has_subsection %}
+                                <ul role="menu" class="sub-menu">
+                                    {% for subsec_m in all_subsections %}
+                                        <li><a href="{% url 'post_list_by_sec_and_subsec' sec_m.sec_slug subsec_m.subsec_slug %}">{{ subsec_m }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="search" style="margin-top: 20px">
+                    <form action="{% url 'search' %}" role="form" method="get">
+                        <i class="fa fa-search"></i>
+                        <div class="field-toggle">
+                            <input id="search" name="q" type="text" class="search-form" autocomplete="off" placeholder="Поиск">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/#header-->
+
+    <section id="page-breadcrumb" class="post-list-title">
+        <div class="vertical-center sun">
+             <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                            <h1 class="title">{% block headline %}{% endblock %}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </section>
+    <!--/#page-breadcrumb-->
+
+    <section id="blog" class="padding-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-sm-7">
+                    {% block content %}
+                    {% endblock %}
+                 </div>
+                <div class="col-md-3 col-sm-5">
+                    <div class="sidebar blog-sidebar">
+                        <div class="sidebar-item  recent">
+                            <h3>Популярные статьи</h3>
+                            {% get_popular_articles_for_week as POPULAR_ARTICLES %}
+                            {% for post in POPULAR_ARTICLES %}
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4><a href="{% url 'post_detail' post.article__slug %}">{{ post.article__article_title }}</a></h4>
+                                        <p>Добавлена {{ post.article__date | date:"d.m.Y" }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="sidebar-item categories">
+                            <h3>Разделы</h3>
+                            <ul class="nav navbar-stacked">
+                                {% get_all_subsection as ALL_SEC %}
+                                {% for sec in ALL_SEC %}
+                                    <li><a href="{% url 'post_list_by_subsec' sec.0.subsec_slug %}">{{ sec.0.name }}<span class="pull-right">({{ sec.1 }})</span></a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#blog-->
+
+    <!-- Footer -->
+<footer class="page-footer font-small blue-grey lighten-5">
+    <div class="container text-center text-md-left mt-5">
+        <div class="row mt-3 dark-grey-text">
+            <div class="col-md-4 col-lg-4 col-xl-3 mb-4">
+                <h6 class="text-uppercase font-weight-bold" id="footer-text-bottom1">Чердак воспоминаний</h6>
+                <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>Здесь будет краткое описание моего блога, после того как я придумаю что написать в разделе "Обо мне" (будет карткая выдержка).</p>
+            </div>
+
+{#        <div class="col-md-2 col-lg-3 col-xl-2 mx-auto mb-4">#}
+{#            <h6 class="text-uppercase font-weight-bold" id="footer-text-bottom2">Меню</h6>#}
+{#            <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">#}
+{#            {% get_all_section as all_sections2 %}#}
+{#            {% for sec_m in all_sections2 %}#}
+{#                <p><a class="dark-grey-text" href="{% url 'post_list_by_sec' sec_m.sec_slug %}">{{ sec_m }}</a></p>#}
+{#            {% endfor %}#}
+{#        </div>#}
+
+            <div class="col-md-4 col-lg-4 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase font-weight-bold" id="footer-text-bottom3">Популярные статьи</h6>
+            <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            {% get_popular_articles_for_week as POPULAR_ARTICLES %}
+            {% for post in POPULAR_ARTICLES %}
+                <div class="media" id="pop-post-footer">
+                    <div class="media-body">
+                        {{ post.article__seo_desription }}
+                        <h4><a href="{% url 'post_detail' post.article__slug %}">{{ post.article__article_title }}</a></h4>
+                        <div>
+                            <span>Добавлена {{ post.article__date | date:"d.m.Y" }}</span>
+                            <span>
+                                <a href="{% url 'post_detail' post.article__slug %}#post-comments">
+                                    <span class="fa fa-comments"></span>
+                                    {% get_comments_count post.article__id %}
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+            <div class="col-md-4 col-lg-4 col-xl-2 mx-auto mb-4">
+            <div class="contact-form bottom">
+                <h6 class="text-uppercase font-weight-bold" id="footer-text-bottom3">Подписаться</h6>
+                <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <form id="subcribe-form" method="post" action="{% url 'newsletter_subscribe' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input class="form-control" type="email" name="email" required placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                       <input type="submit" name="submit" class="btn btn-submit" value="Подписаться">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    <div class="footer-copyright text-center text-black-50 py-3" id="copyright-text">© 2018 Copyright:
+        <a class="dark-grey-text" href="https://mdbootstrap.com/bootstrap-tutorial/"> MDBootstrap.com</a>
+    </div>
+
+</footer>
+  <!-- Footer -->
+
+
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/lightbox.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script>
+        if ($('.response-area').length > 0) {
+            $('#page-breadcrumb').remove();
+            $('.padding-top').css('padding-top', '0px');
+        }
+    </script>
+</body>
+</html>

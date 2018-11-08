@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+{% load blog_extras %}
+{% block title %}Всё о развитии памяти и внимания{% endblock %}
+{% block headline %}Всё о развитии памяти и внимания{% endblock %}
+{#{% block seo %}#}
+{#    <meta name="keywords" content="{{ post.seo_keywords }}">#}
+{#    <meta name="description" content="{{ post.seo_desription }}">#}
+{#{% endblock %}#}
+{% block content %}
+    {% for post in posts %}
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="single-blog single-column">
+                <div class="post-thumb">
+                    <a href="{{ post.get_absolute_url }}"><img src="{{ post.head_image.url }}" class="img-responsive" alt=""></a>
+                </div>
+                <div class="post-content overflow">
+                    <h2 class="post-title bold" id="list-post-title"><a href="{{ post.get_absolute_url }}">{{ post.article_title }}</a></h2>
+                    <h5 class="post-author">Опубликовано {{ post.date | date:"d.m.Y" }}. Автор: <a href="{% url 'post_list_by_author' post.author %}"> {{ post.author.first_name }}</a></h5>
+                    <p>{{ post.article_description | safe }}</p>
+                    <a href="{{ post.get_absolute_url }}" class="read-more">Читать далее</a>
+                    <div class="post-bottom overflow">
+                        <ul class="nav navbar-nav post-nav">
+                            <li><a href="{% url 'post_list_by_sec' post.section.sec_slug %}"><i class="fa fa-book"></i>{{ post.section }}</a></li>
+                            <li><a href="{% url 'post_list_by_sec_and_subsec' post.section.sec_slug post.subsection.subsec_slug %}"><i class="fa fa-tag"></i>{{ post.subsection }}</a></li>
+                            <li><a href="{{ post.get_absolute_url }}#post-comments"><i class="fa fa-comments"></i>{% get_comments_count post.id %}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="blog-pagination">
+        {% bootstrap_pagination posts %}
+    </div>
+
+{% endblock %}

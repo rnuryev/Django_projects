@@ -3,8 +3,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    # path('', views.rzd_tenders_query, name='rzd_tenders_query'),
-    # path('rzd/new/', views.rzd_tenders_new, name='rzd_tenders_new'),
+
     path('', views.dashboard, name='dashboard'),
     path('favorites', views.favorites, name='favorites'),
     path('rzd/', views.rzd_tenders_found, name='rzd_tenders_found'),

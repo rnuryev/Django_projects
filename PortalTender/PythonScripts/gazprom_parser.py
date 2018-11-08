@@ -138,10 +138,12 @@ def get_tender_data(id):
 
     write_db(data)
 
-if __name__ == '__main__':
-
+def run_it():
     all_ids = get_all_ids()
-
 
     with Pool(20) as po:
         po.map(get_tender_data, all_ids)
+
+
+if __name__ == '__main__':
+    run_it()

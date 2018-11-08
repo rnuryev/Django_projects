@@ -172,9 +172,7 @@ def get_page_data(url, token, cookie, id):
 
     write_db(data)
 
-
-if __name__ == '__main__':
-
+def run_it():
     url = 'https://etp.rosseti.ru/index.php?rpctype=direct&module=default'
     data_for_token = {"action": "Index", "method": "index", "data": None, "type": "rpc", "tid": 2, "token": ""}
 
@@ -184,3 +182,6 @@ if __name__ == '__main__':
 
     for i in atl:
         get_page_data(url, token1, ck1, i['id'])
+
+if __name__ == '__main__':
+    run_it()

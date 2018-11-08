@@ -1,0 +1,12 @@
+{% load blog_extras %}
+{% get_popular_articles_for_week as POPULAR_ARTICLES %}
+{% if POPULAR_ARTICLES %}
+    <ul class="list-group">
+        <li class="list-group-item active"><strong>Популярные публикации за неделю</strong></li>
+        {% for post in POPULAR_ARTICLES %}
+            <li class="list-group-item">
+                <a href="{% url 'post_detail' post.article__slug %}">{{ post.article__title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}>

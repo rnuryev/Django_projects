@@ -7,9 +7,7 @@
     <!-- Подключение jQuery плагина Masked Input -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
-{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>#}
-{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+
     {% load bootstrap3 %}
     {% bootstrap_css %}
     {% block static_files %}{% endblock %}
@@ -17,30 +15,6 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-{#<div id="header">#}
-{#    <span class="logo">Bookmarks</span>#}
-{#    {% if request.user.is_authenticated %}#}
-{#        <ul class="menu">#}
-{#            <li {% if section=="dashboard" %}class="selected"{% endif %}>#}
-{#            <a href="{% url " dashboard" %}">My dashboard</a>#}
-{#            </li>#}
-{#            <li {% if section=="images" %}class="selected"{% endif %}>#}
-{#            <a href="#">Images</a>#}
-{#            </li>#}
-{#            <li {% if section=="people" %}class="selected"{% endif %}>#}
-{#                <a href="#">People</a>#}
-{#            </li>#}
-{#        </ul>#}
-{#    {% endif %}#}
-{#    <span class="user">#}
-{#        {% if request.user.is_authenticated %}#}
-{#            Hello {{ request.user.first_name }},#}
-{#            <a href="{% url "logout" %}">Logout</a>#}
-{#        {% else %}#}
-{#            <a href="{% url "login" %}">Log-in</a>#}
-{#        {% endif %}#}
-{#    </span>#}
-{#</div>#}
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">

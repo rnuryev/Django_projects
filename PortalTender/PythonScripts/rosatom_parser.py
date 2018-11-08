@@ -122,7 +122,7 @@ def do_all(url):
     html = get_html(url)
     get_page_data(html)
 
-if __name__ == '__main__':
+def run_it():
     url_basis = 'http://www.zakupki.rosatom.ru/Web.aspx?node=currentorders&tso=1&tsl=1&sbflag=0&ostate=P&findates=' + date.today().strftime(
         '%Y%m%d2359') + '&pform=a&page='
     url = 'http://www.zakupki.rosatom.ru/Web.aspx?node=currentorders&tso=1&tsl=1&sbflag=0&ostate=P&findates=' + date.today().strftime(
@@ -133,6 +133,9 @@ if __name__ == '__main__':
         ur = url_basis + str(i)
         all_pages.append(ur)
 
-
     with Pool(10) as po:
         po.map(do_all, all_pages)
+
+
+if __name__ == '__main__':
+    run_it()

@@ -1,0 +1,52 @@
+{% extends "base2.html" %}
+{% load static %}
+{% load comments %}
+{% load comments_xtd %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p class="date">
+        Опубликовано {{ post.date | date:"d.m.Y" }}. Автор: <a href="{% url 'post_list_by_author' post.author %}"> {{ post.author }}</a>
+    </p>
+    <img src="{{ post.head_image.url }}" class="img-responsive" alt="">
+
+    {{ post.content|safe }}
+    {% get_comment_count for post as comment_count %}
+    {{ comment_count }} комментариев к статье оставлено.
+    <br>
+    Раздел: <a href="{% url 'post_list_by_sec' post.section.sec_slug %}"> {{ post.section }}</a>. Подраздел: <a href="{% url 'post_list_by_subsec' post.subsection.subsec_slug %}"> {{ post.subsection }}</a>
+    {% if comment_count %}
+        <hr/>
+        <ul class="media-list">
+          {% render_xtdcomment_tree for post %}
+        </ul>
+    {% endif %}
+
+    <script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous">
+    </script>
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip({html: true})
+        })
+    </script>
+
+    {% if post.allow_comments %}
+        <div class="comment">
+          <h4 class="text-center">Ваш комментарий</h4>
+          <div class="well">
+            {% render_comment_form for post %}
+          </div>
+        </div>
+    {% endif %}
+
+    {% include 'popular.html' %}
+
+{% endblock %}
